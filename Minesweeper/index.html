@@ -4,10 +4,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="main.js" type="module" defer></script>
+    <title>MineSweeper</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div id="startPage" class="page">
+      <h1>Welcome to MineSweeper</h1>
+      <button id="startButton">Start</button>
+    </div>
+
+    <div id="gamePage" class="page">
+      <div id="board"></div>
+      <button id="gameButton">LeaderBoard</button>
+    </div>
+
+    <div id="scorePage" class="page">
+      <h2>LeaderBoard</h2>
+      <p>jun jie <span> 10</span></p>
+      <button id="return">Return</button>
+    </div>
   </body>
 </html>

@@ -1,23 +1,80 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import { setupCounter } from './counter.js'
+import $ from "jquery";
+console.log($);
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const app = {
+  board: [
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+    ["?", "?", "?", "?", "?", "?", "?", "?"],
+  ],
+  bomb: 8,
+  flag: 8,
+  page: "#startPage",
+};
 
-setupCounter(document.querySelector('#counter'))
+//create board
+const renderBoard = () => {
+  const $board = $("#board").empty();
+  for (let i = 0; i < 8; i++) {
+    const $div = $("<div>");
+    for (let j = 0; j < 8; j++) {
+      const $innerDiv = $("<div>")
+        .text(app.board[i][j])
+        .addClass("board")
+        .attr("id", i + "-" + j);
+
+      $div.append($innerDiv);
+    }
+    $board.append($div);
+  }
+};
+
+//adding bomb
+const generateBomb = () => {
+  let arr = [];
+  while (arr.length < app.bomb) {
+    let randomNum = Math.floor(Math.random() * 8);
+    let randomNum2 = Math.floor(Math.random() * 8);
+    if (arr.includes(randomNum + "-" + randomNum2) === false) {
+      arr.push(randomNum + "-" + randomNum2);
+    }
+  }
+  for (let bomb of arr) {
+    $("#" + bomb).addClass("hasBomb");
+  }
+  return arr;
+};
+
+const clicked = () => {
+  $(".board").on("click", () => console.log("hello"));
+};
+
+const render = () => {
+  $(".page").hide();
+  $(app.page).show();
+  renderBoard();
+  generateBomb();
+  clicked();
+};
+render();
+
+const main = () => {
+  $("#startButton").on("click", () => {
+    app.page = "#gamePage";
+    render();
+  });
+  $("#gameButton").on("click", () => {
+    app.page = "#scorePage";
+    render();
+  });
+  $("#return").on("click", () => {
+    app.page = "#startPage";
+    render();
+  });
+};
+main();
