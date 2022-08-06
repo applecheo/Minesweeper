@@ -3,6 +3,8 @@
   background-color: lightBlue;
   width: 20px;
   height: 20px;
+  padding: 5px;
+  margin: 2px;
   display: inline-block;
 }
 
@@ -30,4 +32,11 @@
   width: 20px;
   height: 20px;
   display: inline-block;
+}
+
+.flag {
+  background-color: #fff000;
+}
+.hide {
+  opacity: 0;
 }
