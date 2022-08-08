@@ -13,17 +13,25 @@ const app = {
     ["", "", "", "", "", "", "", ""],
     ["", "", "", "", "", "", "", ""],
   ],
+  // board1: [],
   bomb: 8,
+  row: 8,
+  column: 8,
   flag: false,
+  flagCount: 8,
   page: "#startPage",
+  isBottom: false,
+  isTop: false,
+  isLeft: false,
+  isRight: false,
 };
 
 //create board
 const renderBoard = () => {
   const $board = $("#board").empty();
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < app.column; i++) {
     const $div = $("<div>");
-    for (let j = 0; j < 8; j++) {
+    for (let j = 0; j < app.column; j++) {
       const $innerDiv = $("<div>")
         .text(app.board[i][j])
         .addClass("board")
@@ -35,6 +43,20 @@ const renderBoard = () => {
   }
 };
 
+//board1
+// const renderBoard1 = () => {
+//   const $board = $("#board").empty();
+//   for (let i = 0; i < app.row; i++) {
+//     const row = [];
+//     for (let j = 0; j < app.column; j++) {
+//       const $column = $("<div>");
+//       row.push($column);
+//     }
+//     app.board1.push(row);
+//   }
+//   $($board).append(app.board1);
+// };
+// renderBoard1();
 //add bomb
 const generateBomb = () => {
   let arr = [];
@@ -65,14 +87,16 @@ document.body.onkeyup = (e) => {
 const addFlag = (e) => {
   if (app.flag === true && $(e.target).hasClass("flag")) {
     $(e.target).removeClass("flag");
-  } else if (app.flag === true) {
+    app.flagCount++;
+  } else if (app.flag === true && app.flagCount > 0) {
     $(e.target).addClass("flag");
+    app.flagCount--;
   }
 };
 
 //check for mine
-const checkMine = (e) => {
-  if ($(e.target).hasClass("hasBomb")) {
+const checkGameOver = (e) => {
+  if ($(e.target).hasClass("hasBomb") && app.flag === false) {
     alert("dead");
   } else {
     alert("not checked");
@@ -84,9 +108,63 @@ const mineCount = () => {
   return $(".mineCount").text(app.bomb);
 };
 
+const leftColumn = (e) => {
+  const $id = $(e.target).attr("id");
+  if ($id.slice(-1) - 1 === -1) {
+    console.log("im left column");
+  }
+};
+
+const rightColumn = (e) => {
+  const $id = $(e.target).attr("id");
+  if ($id.slice(-1) - app.column === -1) {
+    console.log("im right column");
+  }
+};
+
+const topRow = (e) => {
+  const $id = $(e.target).attr("id");
+  if ($id.slice(0, 1) - 1 === -1) {
+    console.log("im top row");
+  }
+};
+
+// const bottomRow = (e) => {
+//   let $id = $(e.target).attr("id");
+//   if ($id.slice(0, 1) - app.row === -1) {
+//     console.log("im bottom row");
+//   }
+// };
+
+const bottomRow = (e) => {
+  const $id = $(e.target).attr("id");
+  const row = parseInt($id[0]);
+  //check left .. create function for all direction
+  const column = parseInt($id[2] - 1);
+  const join = "#" + row + "-" + column;
+  console.log($(join));
+  if ($id.slice(0, 1) - app.row === -1) {
+    console.log("im bottom row");
+  }
+};
+
+const checkMine = (e) => {
+  minesFound = 0;
+  //check left and right
+  const $id = $(e.target).attr("id");
+  const row = parseInt($id[0]);
+  const column = parseInt($id[2] - 1);
+  const join = "#" + row + column;
+  console.log(join);
+};
+
 const clicked = () => {
-  $(".board").on("click", checkMine);
+  $(".board").on("click", checkGameOver);
   $(".board").on("click", addFlag);
+  $(".board").on("click", leftColumn);
+  $(".board").on("click", rightColumn);
+  $(".board").on("click", topRow);
+  $(".board").on("click", bottomRow);
 };
 
 const render = () => {
@@ -96,6 +174,7 @@ const render = () => {
   generateBomb();
   clicked();
   mineCount();
+  console.log(app);
 };
 render();
 
@@ -114,3 +193,11 @@ const main = () => {
   });
 };
 main();
+
+//check mine
+//top row
+// console.log((e.target).attr("id"))
+//left column
+//right column
+// bottom column
+//normal check
