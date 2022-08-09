@@ -1,6 +1,47 @@
 body {
   text-align: center;
 }
+#board {
+  width: 560px;
+  height: 560px;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: yellowgreen;
+  border: 3px outset blue;
+}
+
+#board div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 3px outset blue;
+  background-color: burlywood;
+}
+
+#toggleFlag {
+  width: 50px;
+  height: 40px;
+  font-size: large;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  border: none;
+}
+
+.clicked {
+  background-color: rgb(30, 122, 56);
+}
+.hasBomb {
+  background-color: red;
+}
+
+/* body {
+  text-align: center;
+}
 .board {
   border: 1px outset blue;
   background-color: lightBlue;
@@ -9,6 +50,12 @@ body {
   padding: 5px;
   margin: 2px;
   display: inline-block;
+}
+#board {
+  flex-wrap: wrap;
+}
+.clickedTile {
+  background-color: gray;
 }
 
 #startButton {
@@ -29,17 +76,10 @@ body {
   touch-action: manipulation;
 }
 
-.hasBomb {
-  border: 1px outset blue;
-  background-color: red;
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-}
 
 .flag {
   background-color: #fff000;
 }
 .hide {
   opacity: 0;
-}
+} */
