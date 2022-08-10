@@ -1,9 +1,146 @@
-body {
-  text-align: center;
+/* /background css https://alvarotrigo.com/blog/animated-backgrounds-css// */
+@keyframes color {
+  0% {
+    background: #23b9b9;
+  }
+  20% {
+    background: #33cc36;
+  }
+  40% {
+    background: #b8cc33;
+  }
+  60% {
+    background: #6a2582;
+  }
+  80% {
+    background: #33cc36;
+  }
+  100% {
+    background: #33cccc;
+  }
 }
+
+/* https://webdeasy.de/en/top-css-buttons-en/ */
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.glow-on-hover:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+/* ////////////////////////////////////////////////////// */
+
+/* Main css */
+body {
+  background: #33cccc; /* Fallback */
+  animation: color 9s infinite linear;
+  text-align: center;
+  padding: 2em;
+  font-family: "Kavoon", sans-serif;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: E8F9FD;
+}
+h2 {
+  color: #e8f9fd;
+}
+/* board for intermediate */
 #board {
-  width: 560px;
-  height: 560px;
+  width: 665px;
+  height: 665px;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(50, 78, 177);
+  border: 3px outset burlywood;
+}
+
+#board div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 57px;
+  margin: auto;
+  border: 2px outset #ffb4b4;
+  background-color: #c8b6e2;
+}
+/* board for beginner */
+#board1 {
+  width: 555px;
+  height: 555px;
   margin: auto;
   padding: 10px;
   display: flex;
@@ -12,17 +149,38 @@ body {
   border: 3px outset blue;
 }
 
-#board div {
+#board1 div {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 60px;
   height: 60px;
   margin: auto;
-  border: 3px outset blue;
+  border: 2px outset blue;
   background-color: burlywood;
 }
+/* board for expert */
+#board3 {
+  height: 600px;
+  width: 1200px;
+  margin: auto;
+  padding: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(144, 167, 42);
+  border: 1px outset burlywood;
+}
 
+#board3 div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  margin: auto;
+  border: 2px outset #ac7088;
+  background-color: #76ba99;
+}
 #toggleFlag {
   width: 50px;
   height: 40px;
@@ -39,47 +197,6 @@ body {
   background-color: red;
 }
 
-/* body {
-  text-align: center;
+#returnButton {
+  margin: 20px;
 }
-.board {
-  border: 1px outset blue;
-  background-color: lightBlue;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
-  margin: 2px;
-  display: inline-block;
-}
-#board {
-  flex-wrap: wrap;
-}
-.clickedTile {
-  background-color: gray;
-}
-
-#startButton {
-  background-color: #fff000;
-  border-radius: 12px;
-  color: #000;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 10px 15px;
-  text-align: center;
-  transition: 200ms;
-  width: 20%;
-  box-sizing: border-box;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-
-.flag {
-  background-color: #fff000;
-}
-.hide {
-  opacity: 0;
-} */

@@ -11,45 +11,35 @@
     <title>MineSweeper</title>
   </head>
   <body>
-    <div id="gamePage" class="page">
-      <h1>Total mines: <span class="mineCount"></span></h1>
-      <button id="toggleFlag">🚩</button>
-      <div id="board"></div>
-    </div>
-  </body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="style.css" />
-
-    <script src="main.js" type="module" defer></script>
-    <title>MineSweeper</title>
-  </head>
-  <body>
     <div id="startPage" class="page">
       <h1>Welcome to MineSweeper</h1>
-      <button id="startButton">Start</button>
+      <h2>Select Difficulty to start</h2>
+      <button id="beginnerButton" class="glow-on-hover">Beginner</button>
+      <button id="intermediateButton" class="glow-on-hover">
+        Intermediate
+      </button>
+      <button id="expertButton" class="glow-on-hover">Expert</button>
     </div>
 
     <div id="gamePage" class="page">
-      <h1>
-        Total mines: <span class="mineCount"></span
-        ><span id="toggleFlag" class="hide"> 🚩</span>
-      </h1>
+      <h1 id="totalMine">Total mines: <span class="mineCount"></span></h1>
+      <button id="toggleFlag">🚩</button>
       <div id="board"></div>
-      <button id="gameButton">LeaderBoard</button>
+      <div id="board1"></div>
+      <div id="board3"></div>
+      <button
+        onClick="window.location.reload();"
+        id="returnButton"
+        class="glow-on-hover"
+      >
+        Return
+      </button>
     </div>
 
-    <div id="scorePage" class="page">
+    <!-- <div id="scorePage" class="page">
       <h2>LeaderBoard</h2>
       <p>jun jie <span> 10</span></p>
       <button id="return">Return</button>
-    </div>
+    </div> -->
   </body>
-</html> -->
+</html>
