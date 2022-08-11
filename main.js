@@ -29,7 +29,7 @@ function generateBomb() {
   return arr;
 }
 
-//render board
+//render board intermediate
 const renderBoard = () => {
   const $board = $("#board").empty();
   $("#board1").hide();
@@ -45,7 +45,7 @@ const renderBoard = () => {
     board.push(row);
   }
 };
-
+//render board beginner
 const renderBoard1 = () => {
   const $board = $("#board1").empty();
   $("#board").hide();
@@ -78,7 +78,7 @@ const renderBoard1 = () => {
 //   }
 // };
 
-//adding flag
+// adding flag
 
 function addFlag() {
   if (flagOn) {
