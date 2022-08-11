@@ -8,7 +8,7 @@ const minePosition = [];
 let bomb;
 let isGameOver = false;
 let flagOn = false;
-let tilesClicked = row * column - bomb;
+let isWin = false;
 let page = "#startPage";
 
 //make Bomb
@@ -105,8 +105,6 @@ function showMine() {
 
 //onclick function
 function clicked() {
-  tilesClicked--;
-
   if (flagOn) {
     if ($("#" + this.id).text() === "") {
       $("#" + this.id).text("🚩");
@@ -131,18 +129,24 @@ function clicked() {
 }
 
 function checkForMine(id1, id2) {
+  if (id1 < 0 || row <= id1) {
+    return 0;
+  }
+  if (id2 < 0 || column <= id2) {
+    return 0;
+  }
   if (isGameOver === true) {
+    return 0;
+  }
+  if (isWin === true) {
     return 0;
   }
 
   if ($("#" + id1 + "-" + id2).hasClass("clicked")) {
     return 0;
   }
-  board[id1][id2].css("background", "white").addClass("clicked");
 
-  if (tilesClicked === 0) {
-    $("#totalMine").text("Win liao");
-  }
+  board[id1][id2].css("background", "white").addClass("clicked");
 
   let mineCount = 0;
 
@@ -158,23 +162,28 @@ function checkForMine(id1, id2) {
   mineCount = checkTile(id1 + 1, id2) + mineCount;
   mineCount = checkTile(id1 + 1, id2 + 1) + mineCount;
 
-  // if (mineCount > 0) {
-  board[id1][id2].text(mineCount);
-  // } else {
-  //   checkForMine(id1, id2 - 1);
-  //   checkForMine(id1, id2 + 1);
+  if (mineCount > 0) {
+    board[id1][id2].text(mineCount);
+  } else {
+    checkForMine(id1, id2 - 1);
+    checkForMine(id1, id2 + 1);
 
-  //   checkForMine(id1 - 1, id2 - 1);
-  //   checkForMine(id1 - 1, id2);
-  //   checkForMine(id1 - 1, id2 + 1);
+    checkForMine(id1 - 1, id2 - 1);
+    checkForMine(id1 - 1, id2);
+    checkForMine(id1 - 1, id2 + 1);
 
-  //   checkForMine(id1 + 1, id2 - 1);
-  //   checkForMine(id1 + 1, id2);
-  //   checkForMine(id1 + 1, id2 + 1);
-  // }
+    checkForMine(id1 + 1, id2 - 1);
+    checkForMine(id1 + 1, id2);
+    checkForMine(id1 + 1, id2 + 1);
+  }
 }
 
 function checkTile(id1, id2) {
+  if ($("div .clicked").length === row * column - bomb) {
+    isWin = true;
+    $("#totalMine").text("Win liao");
+    return 0;
+  }
   if ($("#" + id1 + "-" + id2).hasClass("hasBomb")) {
     return 1;
   } else {
