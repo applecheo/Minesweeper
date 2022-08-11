@@ -113,7 +113,9 @@ function clicked() {
     }
     return;
   }
-
+  if (isWin === true) {
+    return;
+  }
   if (minePosition.includes(this.id)) {
     showMine();
     isGameOver = true;
@@ -130,20 +132,21 @@ function clicked() {
 
 function checkForMine(id1, id2) {
   if (id1 < 0 || row <= id1) {
-    return 0;
+    return;
   }
   if (id2 < 0 || column <= id2) {
-    return 0;
+    return;
   }
   if (isGameOver === true) {
-    return 0;
+    return;
   }
+
   if (isWin === true) {
-    return 0;
+    return;
   }
 
   if ($("#" + id1 + "-" + id2).hasClass("clicked")) {
-    return 0;
+    return;
   }
 
   board[id1][id2].css("background", "white").addClass("clicked");

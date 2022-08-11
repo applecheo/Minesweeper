@@ -4,7 +4,7 @@ What is MineSweeper?
 Minesweeper game features a grid of clickable squares, with hidden "mines" scattered throughout the board. The objective is to clear the board without detonating any mines, with help from clues about the number of neighboring mines in each field.
 
 Why MineSweeper?
-Didn't know how to
+Didn't know how minesweeper works. Decided to recreate and at the same time learn how to play the game.
 
 Key Learnings
 -Practising and applying what I have learnt(dom, higher order functions etc)
@@ -12,7 +12,7 @@ Key Learnings
 -console.log when you are stuck to find out what is wrong
 
 1. Approach and process
-   Something I would have done differently would be cater more time to the planning the whole game. User story was not well thought out hence when more component was added, codes that interacted with that portion had to be amended. Committing my work when part of code completed saved me a lot of time as it was I was able to track what changed.
+   Something I would have done differently would be cater more time to the planning the whole game. User story was not well thought out hence when more component was added, codes that interacted with that portion had to be amended. Committing my work when part of code completed saved me a lot of time as I was able to track what changed.
 
 2. Code and code design
    //Bad
