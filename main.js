@@ -37,8 +37,9 @@ const renderBoard = () => {
   for (let i = 0; i < row; i++) {
     let row = [];
     for (let j = 0; j < column; j++) {
-      const div = $("<div>").attr("id", i + "-" + j);
-      div.on("click", clicked);
+      let id = i + "-" + j;
+      const div = $("<div>").attr("id", id);
+      div.on("click", clicked(id));
       $board.append(div);
       row.push(div);
     }
@@ -53,8 +54,9 @@ const renderBoard1 = () => {
   for (let i = 0; i < row; i++) {
     let row = [];
     for (let j = 0; j < column; j++) {
-      const div = $("<div>").attr("id", i + "-" + j);
-      div.on("click", clicked);
+      let id = i + "-" + j;
+      const div = $("<div>").attr("id", id);
+      div.on("click", clicked(id));
       $board.append(div);
       row.push(div);
     }
@@ -69,7 +71,8 @@ const renderBoard1 = () => {
 //   for (let i = 0; i < row; i++) {
 //     let row = [];
 //     for (let j = 0; j < column; j++) {
-//       const div = $("<div>").attr("id", i + "-" + j);
+// let id = i + "-" + j;
+//       const div = $("<div>").attr("id", id);
 //       div.on("click", clicked);
 //       $board.append(div);
 //       row.push(div);
@@ -80,7 +83,7 @@ const renderBoard1 = () => {
 
 // adding flag
 
-function addFlag() {
+const addFlag = () => {
   if (flagOn) {
     flagOn = false;
     $("#toggleFlag").removeClass("clicked");
@@ -88,11 +91,11 @@ function addFlag() {
     flagOn = true;
     $("#toggleFlag").addClass("clicked");
   }
-}
+};
 
 $("#toggleFlag").on("click", addFlag);
 
-function showMine() {
+const showMine = () => {
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < column; j++) {
       let tile = board[i][j];
@@ -101,36 +104,36 @@ function showMine() {
       }
     }
   }
-}
+};
 
 //onclick function
-function clicked() {
+const clicked = (id) => () => {
   if (flagOn) {
-    if ($("#" + this.id).text() === "") {
-      $("#" + this.id).text("🚩");
-    } else if ($("#" + this.id).text() === "🚩") {
-      $("#" + this.id).text("");
+    if ($("#" + id).text() === "") {
+      $("#" + id).text("🚩");
+    } else if ($("#" + id).text() === "🚩") {
+      $("#" + id).text("");
     }
     return;
   }
   if (isWin === true) {
     return;
   }
-  if (minePosition.includes(this.id)) {
+  if (minePosition.includes(id)) {
     showMine();
     isGameOver = true;
     $("#totalMine").text("Game Over");
   }
 
   //get mine position
-  const position = this.id.split("");
+  const position = id.split("");
   const id1 = parseInt(position[0]);
   const id2 = parseInt(position[2]);
 
   checkForMine(id1, id2);
-}
+};
 
-function checkForMine(id1, id2) {
+const checkForMine = (id1, id2) => {
   if (id1 < 0 || row <= id1) {
     return;
   }
@@ -179,9 +182,9 @@ function checkForMine(id1, id2) {
     checkForMine(id1 + 1, id2);
     checkForMine(id1 + 1, id2 + 1);
   }
-}
+};
 
-function checkTile(id1, id2) {
+const checkTile = (id1, id2) => {
   if ($("div .clicked").length === row * column - bomb) {
     isWin = true;
     $("#totalMine").text("Win liao");
@@ -192,7 +195,7 @@ function checkTile(id1, id2) {
   } else {
     return 0;
   }
-}
+};
 const render = () => {
   $(".page").hide();
   $(page).show();
